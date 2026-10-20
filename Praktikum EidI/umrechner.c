@@ -26,8 +26,11 @@ void umrechnen(const char *auswahlText, const char *aufforderung, double (*forme
     char *eingabeUmwandlungKeineZahl;
     double ergebnis;
     int k = 0;
+    int stellenVorDemKomma;
+    int stellenNachDemKomma;
 
     printf("%s", auswahlText);
+    printf("Es dürfen vor dem Komma maximal 10 und nach dem Komma maximal 5 Stellen eingegeben werden.\n");
     printf("%s", aufforderung);
     
     while (k < 1) {
@@ -38,18 +41,37 @@ void umrechnen(const char *auswahlText, const char *aufforderung, double (*forme
             if (eingabeZahlChar[k] == ',') eingabeZahlChar[k] = '.';
         } // Komma als Dezimaltrennzeichen erlauben
 
-        eingabeUmwandlungZahlDouble = strtod(eingabeZahlChar, &eingabeUmwandlungKeineZahl);
-
-        if (*eingabeUmwandlungKeineZahl != '\0') {
+        if (eingabeZahlChar[0] == '.') {
+            k = 0; // Zahl darf nicht mit einem Punkt beginnen
             printf("Fehlerhafte Eingabe! Bitte geben Sie eine Zahl ein: ");
-            k = 0;
         }
+
         else {
-            ergebnis = formel(eingabeUmwandlungZahlDouble);
-            printf("Das Ergebnis ist: %.2f\n", ergebnis);
+            int laenge = strlen(eingabeZahlChar);
+            int punktGefunden = 0;
+            stellenVorDemKomma = laenge;
+            stellenNachDemKomma = 0;
+
+            for (int k = 0; eingabeZahlChar[k] != '\0'; k++) {
+                if (eingabeZahlChar[k] == '.' && punktGefunden == 0) {
+                    punktGefunden = 1;
+                    stellenVorDemKomma = k;
+                    stellenNachDemKomma = laenge - k - 1;
+                }
+            } // Stellen vor und nach dem Komma zählen
+
+            eingabeUmwandlungZahlDouble = strtod(eingabeZahlChar, &eingabeUmwandlungKeineZahl);
+
+            if (*eingabeUmwandlungKeineZahl == '\0' && stellenVorDemKomma <= 10 && stellenNachDemKomma <= 5) {
+                ergebnis = formel(eingabeUmwandlungZahlDouble);
+                printf("Das Ergebnis ist: %.2f\n", ergebnis);
+            }
+            else {
+                printf("Fehlerhafte Eingabe! Bitte geben Sie eine Zahl ein: ");
+                k = 0;
+            }
         }
     }
-
 }
 
 int main() {
