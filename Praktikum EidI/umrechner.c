@@ -42,13 +42,16 @@ void umrechnen(const char *auswahlText, const char *aufforderung,
         if (statusScanf != 1) {
             printf("Ungültige Eingabe! Bitte eine Zahl eingeben: ");
         } // Fall A: Es wurde überhaupt keine Zahl eingegeben (z.B. "abc")
+        else if (extraZeichen == ',') {
+            printf("Es wurde ein Komma anstatt eines Punktes verwendet! Bitte eine Zahl eingeben: ");
+        } // Fall B: Es wurde ein Komma anstatt eines Punktes verwendet
         else if (extraZeichen != '\n' && extraZeichen != EOF) {
             printf("Ungültiges Zeichen nach der Zahl erkannt! Bitte eine Zahl eingeben: ");
-        } // Fall B: Zahl wurde gelesen, aber danach kam Müll (z.B. "5g")
+        } // Fall C: Zahl wurde gelesen, aber danach kam Müll (z.B. "5g")
         else if (eingabeZahl < mindestWert || eingabeZahl > maximalWert) {
-            printf("Der Wert %.2f liegt außerhalb des erlaubten Bereichs (%.2f bis %.2f).\n", 
+            printf("Der Wert %.2f liegt außerhalb des erlaubten Bereichs (%.2f bis %.2f). Bitte eine Zahl eingeben: ", 
                    eingabeZahl, mindestWert, maximalWert);
-        } // Fall C: Die Zahl ist gültig, liegt aber außerhalb der Grenzen
+        } // Fall D: Die Zahl ist gültig, liegt aber außerhalb der Grenzen
         else {
             i = 1;
         } // Alles ist korrekt!
@@ -67,6 +70,7 @@ int main() {
     char eingabeAuswahl[3];
     int statusEingabe;
     int i = 0;
+    int extraZeichen;
 
     printf("Willkommen beim Umrechner. Sie haben folgende Auswahlmöglichkeiten:\n");
     printf("1: Celsius zu Fahrenheit\n");
@@ -82,22 +86,22 @@ int main() {
         if (statusEingabe == 1) {
 
             if (eingabeAuswahl[0] == '1' && eingabeAuswahl[1] == '\0') {
-                umrechnen("Sie haben Celsius zu Fahrenheit gewählt. Es sind Werte zwischen -273.15° und 1000000° erlaubt.\n",
+                umrechnen("Sie haben Celsius zu Fahrenheit gewählt. Es sind Werte zwischen -273.15° und 1000000° erlaubt, dazu werden keine Kommata, sondern nur Punkte akzeptiert.\n",
           "Bitte geben Sie die Temperatur in Celsius ein: ",
           celsiusZuFahrenheit, -273.15, 1000000);
             }
             else if (eingabeAuswahl[0] == '2' && eingabeAuswahl[1] == '\0') {
-                umrechnen("Sie haben Fahrenheit zu Celsius gewählt. Es sind Werte zwischen -459.57°F und 1800032.1°F erlaubt.\n",
+                umrechnen("Sie haben Fahrenheit zu Celsius gewählt. Es sind Werte zwischen -459.57°F und 1800032.1°F erlaubt, dazu werden keine Kommata, sondern nur Punkte akzeptiert.\n",
           "Bitte geben Sie die Temperatur in Fahrenheit ein: ",
           fahrenheitZuCelsius, -459.57, 1800032.1);
             }
             else if (eingabeAuswahl[0] == '3' && eingabeAuswahl[1] == '\0') {
-                umrechnen("Sie haben Meter zu Fuss gewählt.\n",
+                umrechnen("Sie haben Meter zu Fuss gewählt, dazu werden keine Kommata, sondern nur Punkte akzeptiert.\n",
           "Bitte geben Sie die Länge in Metern ein: ",
           meterZuFuss, 0, 1000000);
             }
             else if (eingabeAuswahl[0] == '4' && eingabeAuswahl[1] == '\0') {
-                umrechnen("Sie haben Fuss zu Meter gewählt.\n",
+                umrechnen("Sie haben Fuss zu Meter gewählt, dazu werden keine Kommata, sondern nur Punkte akzeptiert.\n",
           "Bitte geben Sie die Länge in Fuss ein: ",
           fussZuMeter, 0, 3280840);
             }
@@ -105,18 +109,18 @@ int main() {
                 printf("Fehlerhafte Eingabe! Geben Sie bitte eine passende Eingabe ein: ");
                 i = 0;
 
-                int ch;
-                while ((ch = getchar()) != '\n' && ch != EOF) {
-                }
+                while (extraZeichen != '\n' && extraZeichen != EOF) {
+            extraZeichen = getchar();
+        }
             }
         }
         else {
             printf("Fehlerhafte Eingabe! Geben Sie bitte eine passende Eingabe ein: \n");
             i = 0;
 
-            int ch;
-            while ((ch = getchar()) != '\n' && ch != EOF) {
-            }
+            while (extraZeichen != '\n' && extraZeichen != EOF) {
+            extraZeichen = getchar();
+        }
         }
     } while (i < 1);
 
