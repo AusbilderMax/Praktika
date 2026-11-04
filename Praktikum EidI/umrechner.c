@@ -1,14 +1,12 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
-// Methoden zum Umrechnen der Einheiten. Die Methoden nehmen eine Zahl entgegen und geben die umgerechnete Zahl zurück.
+// Methoden zum Umrechnen der Einheiten
 double celsiusZuFahrenheit(double eingabeZahl) {
-    return eingabeZahl * 9.0/5.0 + 32.1;
+    return eingabeZahl * 9.0 / 5.0 + 32.1;
 }
 
 double fahrenheitZuCelsius(double eingabeZahl) {
-    return (eingabeZahl - 32.1) * 5.0/9.0;
+    return (eingabeZahl - 32.1) * 5.0 / 9.0;
 }
 
 double meterZuFuss(double eingabeZahl) {
@@ -19,59 +17,50 @@ double fussZuMeter(double eingabeZahl) {
     return eingabeZahl * 0.3048;
 }
 
-// Bekommt: Text der Auswahl, Text der Aufforderung und die Formel
-void umrechnen(const char *auswahlText, const char *aufforderung, double (*formel)(double)) {
-    char eingabeZahlChar[20];
-    double eingabeUmwandlungZahlDouble;
-    char *eingabeUmwandlungKeineZahl;
+// Methode zum Umrechnen der Eingabe mit Ausgabe
+void umrechnen(const char *auswahlText, const char *aufforderung,
+               double (*formel)(double), double mindestWert, double maximalWert) {
+
+    double eingabeZahl;
     double ergebnis;
-    int k = 0;
-    int stellenVorDemKomma;
-    int stellenNachDemKomma;
+    int statusScanf;
+    int extraZeichen;
+    int i = 0;
 
     printf("%s", auswahlText);
-    printf("Es dürfen vor dem Komma maximal 10 und nach dem Komma maximal 5 Stellen eingegeben werden.\n");
     printf("%s", aufforderung);
     
-    while (k < 1) {
-        k = 1;
-        scanf("%19s", eingabeZahlChar);
+    do {
         
-        for (int k = 0; eingabeZahlChar[k] != '\0'; k++) {
-            if (eingabeZahlChar[k] == ',') eingabeZahlChar[k] = '.';
-        } // Komma als Dezimaltrennzeichen erlauben
+        // 1. scanf ausführen und Rückgabewert speichern (muss 1 sein, sonst Müll)
+        statusScanf = scanf("%lf", &eingabeZahl);
+        
+        // 2. Das direkt nächste Zeichen nach der gültigen Eingabe im Puffer prüfen
+        extraZeichen = getchar();
 
-        if (eingabeZahlChar[0] == '.') {
-            k = 0; // Zahl darf nicht mit einem Punkt beginnen
-            printf("Fehlerhafte Eingabe! Bitte geben Sie eine Zahl ein: ");
-        }
-
+        // 3. Überprüfung der Eingabe
+        if (statusScanf != 1) {
+            printf("Ungültige Eingabe! Bitte eine Zahl eingeben: ");
+        } // Fall A: Es wurde überhaupt keine Zahl eingegeben (z.B. "abc")
+        else if (extraZeichen != '\n' && extraZeichen != EOF) {
+            printf("Ungültiges Zeichen nach der Zahl erkannt! Bitte eine Zahl eingeben: ");
+        } // Fall B: Zahl wurde gelesen, aber danach kam Müll (z.B. "5g")
+        else if (eingabeZahl < mindestWert || eingabeZahl > maximalWert) {
+            printf("Der Wert %.2f liegt außerhalb des erlaubten Bereichs (%.2f bis %.2f).\n", 
+                   eingabeZahl, mindestWert, maximalWert);
+        } // Fall C: Die Zahl ist gültig, liegt aber außerhalb der Grenzen
         else {
-            int laenge = strlen(eingabeZahlChar);
-            int punktGefunden = 0;
-            stellenVorDemKomma = laenge;
-            stellenNachDemKomma = 0;
+            i = 1;
+        } // Alles ist korrekt!
 
-            for (int k = 0; eingabeZahlChar[k] != '\0'; k++) {
-                if (eingabeZahlChar[k] == '.' && punktGefunden == 0) {
-                    punktGefunden = 1;
-                    stellenVorDemKomma = k;
-                    stellenNachDemKomma = laenge - k - 1;
-                }
-            } // Stellen vor und nach dem Komma zählen
+        while (extraZeichen != '\n' && extraZeichen != EOF) {
+            extraZeichen = getchar();
+        } // Puffer leeren indem man mit getchar() aus dem Puffer nach und nach die Zeichen holt
 
-            eingabeUmwandlungZahlDouble = strtod(eingabeZahlChar, &eingabeUmwandlungKeineZahl);
+    } while (i != 1); // Schleife läuft, bis i = 1 ist und damit die Eingabe gültig ist
 
-            if (*eingabeUmwandlungKeineZahl == '\0' && stellenVorDemKomma <= 10 && stellenNachDemKomma <= 5) {
-                ergebnis = formel(eingabeUmwandlungZahlDouble);
-                printf("Das Ergebnis ist: %.2f\n", ergebnis);
-            }
-            else {
-                printf("Fehlerhafte Eingabe! Bitte geben Sie eine Zahl ein: ");
-                k = 0;
-            }
-        }
-    }
+    ergebnis = formel(eingabeZahl);
+    printf("Das Ergebnis ist: %.2f\n", ergebnis);
 }
 
 int main() {
@@ -79,54 +68,57 @@ int main() {
     int statusEingabe;
     int i = 0;
 
-printf("Wilkommen beim Umrechner. Sie haben folgende Auswahlmöglichkeiten:\n");
-printf("1: Celsius zu Fahrenheit\n");
-printf("2: Fahrenheit zu Celsius\n");
-printf("3: Meter zu Fuss\n");
-printf("4: Fuss zu Meter\n");
-printf("Bitte geben Sie die Zahl der gewünschten Umrechnung ein: ");
+    printf("Willkommen beim Umrechner. Sie haben folgende Auswahlmöglichkeiten:\n");
+    printf("1: Celsius zu Fahrenheit\n");
+    printf("2: Fahrenheit zu Celsius\n");
+    printf("3: Meter zu Fuss\n");
+    printf("4: Fuss zu Meter\n");
+    printf("Bitte geben Sie die Zahl der gewünschten Umrechnung ein: ");
 
-    while (i < 1) {
+    do {
         i = 1;
         statusEingabe = scanf("%2s", eingabeAuswahl);
-        int laengeEingabeAuswahl = strlen(eingabeAuswahl);
+
         if (statusEingabe == 1) {
 
-            if (eingabeAuswahl[0] == '1' && laengeEingabeAuswahl == 1) {
-                umrechnen("Sie haben Celsius zu Fahrenheit gewählt.\n",
-                          "Bitte geben Sie die Temperatur in Celsius ein: ",
-                          celsiusZuFahrenheit);
+            if (eingabeAuswahl[0] == '1' && eingabeAuswahl[1] == '\0') {
+                umrechnen("Sie haben Celsius zu Fahrenheit gewählt. Es sind Werte zwischen -273.15° und 1000000° erlaubt.\n",
+          "Bitte geben Sie die Temperatur in Celsius ein: ",
+          celsiusZuFahrenheit, -273.15, 1000000);
             }
-            else if (eingabeAuswahl[0] == '2' && laengeEingabeAuswahl == 1) {
-                umrechnen("Sie haben Fahrenheit zu Celsius gewählt.\n",
-                          "Bitte geben Sie die Temperatur in Fahrenheit ein: ",
-                          fahrenheitZuCelsius);
+            else if (eingabeAuswahl[0] == '2' && eingabeAuswahl[1] == '\0') {
+                umrechnen("Sie haben Fahrenheit zu Celsius gewählt. Es sind Werte zwischen -459.57°F und 1800032.1°F erlaubt.\n",
+          "Bitte geben Sie die Temperatur in Fahrenheit ein: ",
+          fahrenheitZuCelsius, -459.57, 1800032.1);
             }
-            else if (eingabeAuswahl[0] == '3' && laengeEingabeAuswahl == 1) {
+            else if (eingabeAuswahl[0] == '3' && eingabeAuswahl[1] == '\0') {
                 umrechnen("Sie haben Meter zu Fuss gewählt.\n",
-                          "Bitte geben Sie die Länge in Metern ein: ",
-                          meterZuFuss);
+          "Bitte geben Sie die Länge in Metern ein: ",
+          meterZuFuss, 0, 1000000);
             }
-            else if (eingabeAuswahl[0] == '4' && laengeEingabeAuswahl == 1) {
+            else if (eingabeAuswahl[0] == '4' && eingabeAuswahl[1] == '\0') {
                 umrechnen("Sie haben Fuss zu Meter gewählt.\n",
-                          "Bitte geben Sie die Länge in Fuss ein: ",
-                          fussZuMeter);
+          "Bitte geben Sie die Länge in Fuss ein: ",
+          fussZuMeter, 0, 3280840);
             }
             else {
-                printf("Geben sie bitte eine passende Eingabe ein: ");
+                printf("Fehlerhafte Eingabe! Geben Sie bitte eine passende Eingabe ein: ");
                 i = 0;
+
                 int ch;
                 while ((ch = getchar()) != '\n' && ch != EOF) {
                 }
             }
         }
         else {
-            printf("Fehlerhafte Eingabe!\n");
+            printf("Fehlerhafte Eingabe! Geben Sie bitte eine passende Eingabe ein: \n");
             i = 0;
+
             int ch;
             while ((ch = getchar()) != '\n' && ch != EOF) {
             }
         }
-    } // Ende der while-Schleife
+    } while (i < 1);
+
     return 0;
 }
