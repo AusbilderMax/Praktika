@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(void) {
-    printf("%7s %10s\n", "Celsius", "Fahrenheit");
+    printf("%7s %-10s\n", "Celsius", "Fahrenheit");
     printf("%7.2f %-10.2f\n", -20.00, -4.00);
     printf("%7.2f %-10.2f\n", -10.00, 14.00);
     printf("%7.2f %-10.2f\n", 0.00, 32.00);
