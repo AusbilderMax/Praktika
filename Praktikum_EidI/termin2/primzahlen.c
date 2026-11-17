@@ -2,7 +2,7 @@
 
 int main() {
 
-char eingabeZahl[21];
+char eingabeZahl[16];
 fgets(eingabeZahl, sizeof(eingabeZahl), stdin);
 
 }

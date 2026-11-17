@@ -4,18 +4,18 @@
 
 int main() {
 
-    srand(time(NULL));
     int zufallszahl = rand() % 100 + 1;
     char eingabezahlArray[5];
     int eingabezahl;
     int versuche;
+    int a = 0;
 
     printf("Willkommen zum Zahlenratespiel!\n");
     printf("Ich habe mir eine Zahl zwischen 1 und 100 ausgedacht.\n");
     printf("Versuche sie zu erraten!\n");
 
     do {
-        
+        a = 0;
         printf("Gib deine Zahl ein: ");
         fgets(eingabezahlArray, 5, stdin);
 
@@ -23,9 +23,24 @@ int main() {
         int c;
         while ((c = getchar()) != '\n' && c != EOF);
         }
+        
+        for(int i = 0; i != 5; i++) {
+            if( eingabezahlArray[i] < '0' || eingabezahlArray[i] > '9' || eingabezahlArray[i] != '\n' || eingabezahlArray[i] != '\0') {
+            //printf("Bitte gib direkt eine Zahl ein, keinen Unfug, auch keine Leerzeichen!\n");
+            a = 1;
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+            continue;
+            }
+        }
 
-        for (int i = 0; eingabezahlArray[i] >= '0' && eingabezahlArray[i] <= '9'; i++) {
-        eingabezahl = (eingabezahl * 10) + (eingabezahlArray[i] - '0');
+        if(a == 1) {
+            printf("Bitte gib direkt eine Zahl ein, keinen Unfug, auch keine Leerzeichen!\n");
+            continue;
+        } else {
+            for (int i = 0; eingabezahlArray[i] >= '0' && eingabezahlArray[i] <= '9'; i++) {
+            eingabezahl = (eingabezahl * 10) + (eingabezahlArray[i] - '0');
+            }
         }
 
             if (0 > eingabezahl || eingabezahl > 100) {
