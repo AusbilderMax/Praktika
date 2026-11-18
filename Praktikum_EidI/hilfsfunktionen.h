@@ -75,5 +75,3 @@ int intEingabe(int minWert, int maxWert, int maxLaenge,  int sollAnsage) {
 
     } while (1);    
 }
-
-#endif
