@@ -25,15 +25,15 @@ int intEingabe(int minWert, int maxWert, int maxLaenge,  int sollAnsage) {
         }
 
         // 1. PUFFER REINIGEN
-        int hat_newline = 0;
+        int hatNewline = 0;
         for(int i = 0; i < maxLaenge; i++) {
             if(eingabe[i] == '\n') {
-                hat_newline = 1;
+                hatNewline = 1;
                 break;
             }
         }
         
-        if (!hat_newline) {
+        if (!hatNewline) {
             int c;
             while ((c = getchar()) != '\n' && c != EOF);
             a = 1; 
