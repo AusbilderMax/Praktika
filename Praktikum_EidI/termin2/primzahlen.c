@@ -19,6 +19,7 @@ int main() {
         for(int j = 3; j <= sqrt(i); j += 2) {
             if(i % j == 0) {
                 istPrimzahl = 0;
+                break;
             }
             
         }

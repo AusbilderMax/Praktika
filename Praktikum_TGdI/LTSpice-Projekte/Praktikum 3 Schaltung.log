@@ -1,0 +1,55 @@
+LTspice 26.1.1 for Windows
+Circuit: C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net
+Start Time: Wed Nov 25 17:52:15 2026
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(7): Sub-circuit pin names do not match number of nodes. Expected 5 pin names, found 3.
+X§U14 X1 /X0 N002 VCC 0 74HCT00 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)B)Y
+                                                           ^^^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(8): Sub-circuit pin names do not match number of nodes. Expected 5 pin names, found 3.
+X§U15 /X3 X1 N001 VCC 0 74HCT00 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)B)Y
+                                                           ^^^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(9): Sub-circuit pin names do not match number of nodes. Expected 5 pin names, found 3.
+X§U16 /X3 X2 N004 VCC 0 74HCT00 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)B)Y
+                                                           ^^^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(10): Sub-circuit pin names do not match number of nodes. Expected 6 pin names, found 4.
+X§U17 X3 /X1 X0 N003 VCC 0 74HCT10 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)B)C)Y
+                                                              ^^^^^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(11): Sub-circuit pin names do not match number of nodes. Expected 6 pin names, found 4.
+X§U18 N001 N002 N003 N005 VCC 0 74HCT10 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)B)C)Y
+                                                                   ^^^^^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(12): Sub-circuit pin names do not match number of nodes. Expected 6 pin names, found 4.
+X§U19 X2 /X1 /X0 N006 VCC 0 74HCT10 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)B)C)Y
+                                                               ^^^^^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(13): Sub-circuit pin names do not match number of nodes. Expected 6 pin names, found 4.
+X§U20 X3 /X2 X1 N008 VCC 0 74HCT10 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)B)C)Y
+                                                              ^^^^^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(14): Sub-circuit pin names do not match number of nodes. Expected 6 pin names, found 4.
+X§U21 X3 /X2 X0 N009 VCC 0 74HCT10 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)B)C)Y
+                                                              ^^^^^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(15): Sub-circuit pin names do not match number of nodes. Expected 7 pin names, found 5.
+X§U22 N004 N006 N008 N009 N007 VCC 0 74HCT20 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)B)C)D)Y
+                                                                        ^^^^^^^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(16): Sub-circuit pin names do not match number of nodes. Expected 4 pin names, found 2.
+X§U23 X0 /X0 VCC 0 74HCT04 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)Y
+                                                      ^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(17): Sub-circuit pin names do not match number of nodes. Expected 4 pin names, found 2.
+X§U24 X1 /X1 VCC 0 74HCT04 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)Y
+                                                      ^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(18): Sub-circuit pin names do not match number of nodes. Expected 4 pin names, found 2.
+X§U25 X2 /X2 VCC 0 74HCT04 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)Y
+                                                      ^^^^^^^^^^^
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net(19): Sub-circuit pin names do not match number of nodes. Expected 4 pin names, found 2.
+X§U26 X3 /X3 VCC 0 74HCT04 VCC=5 SPEED=1.0 TRIPDT=1e-9 ;§pnba A)Y
+                                                      ^^^^^^^^^^^
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 0.484 seconds.
+Total iterations: 6164
+
+Files loaded:
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\Praktikum 3 Schaltung.net
+C:\Users\Service\Documents\GitHub\Praktika\Praktikum_TGdI\LTSpice-Projekte\lib\sub\74hct.lib
+

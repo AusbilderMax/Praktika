@@ -24,7 +24,7 @@ int main() {
                 int versuche = 0;
 
                 printf("Willkommen zum Zahlenratespiel!\n");
-                printf("Ich habe mir eine Zahl zwischen 1 und 100 ausgedacht.\n");
+                printf("Ich habe mir eine Zahl zwischen einschließlich 1 und 100 ausgedacht.\n");
                 printf("Versuche sie zu erraten!\n");
 
                 do {
@@ -66,6 +66,7 @@ int main() {
                     for(int j = 3; j <= sqrt(i); j += 2) {
                         if(i % j == 0) {
                             istPrimzahl = 0;
+                            break;
                         }
                         
                     }
